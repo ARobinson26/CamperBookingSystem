@@ -24,7 +24,9 @@ namespace CamperBookingSystem
 
             if (oUser != null && oUser.username == txtUserName.Text)
             {
-                MessageBox.Show("Correct!");
+                UserMenu userMenu = new UserMenu();
+                this.Hide();
+                userMenu.Show();
             }
             else
             {
