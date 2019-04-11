@@ -50,6 +50,49 @@ namespace CamperBookingSystem.Classes
                 sqlConnection.Close();
             }
         }
+
+        /// <summary>
+        /// Queries database for a single user with matching username.
+        /// </summary>
+        /// <param name="username">The username to query the DB for.</param>
+        /// <returns></returns>
+        public static DataRow FindUser(string username)
+        {
+            SqlConnection sqlConnection = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CamperBookingSystemDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
+            try
+            {
+
+                sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand(@"SELECT * FROM [User] WHERE username = @Username", sqlConnection);
+                sqlCommand.CommandType = System.Data.CommandType.Text;
+                sqlCommand.Parameters.Add("@Username", SqlDbType.VarChar, 10);
+                sqlCommand.Parameters["@Username"].Value = username;
+              
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                DataSet dataSet = new DataSet();
+                sqlDataAdapter.Fill(dataSet);
+
+                if (dataSet.Tables[0].Rows.Count > 0)
+                {
+                    return dataSet.Tables[0].Rows[0];
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+          
+
+        }
+
     }
 }
 

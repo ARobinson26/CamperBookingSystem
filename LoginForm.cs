@@ -19,7 +19,18 @@ namespace CamperBookingSystem
 
         private void btnLogIn_Click(object sender, EventArgs e)
         {
+            Classes.User oUser = new Classes.User();
+            oUser = Classes.User.Find(txtUserName.Text);
 
+            if (oUser != null && oUser.username == txtUserName.Text)
+            {
+                MessageBox.Show("Correct!");
+            }
+            else
+            {
+                MessageBox.Show("Wrong!");
+            }
         }
+
     }
 }

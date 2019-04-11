@@ -23,6 +23,8 @@ namespace CamperBookingSystem.Classes
         {
             //Creates new object 'oCamper' as Camper Class.
             Camper oCamper = new Camper();
+
+            //Creates new object 'dataRow' as a DataRow class containing results from DB query.
             DataRow dataRow = DB.FindCamper(queriedRegistration);
 
             //If the datarow returned isn't black, set oVehicle = to data found in query.
